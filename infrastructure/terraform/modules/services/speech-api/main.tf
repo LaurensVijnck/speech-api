@@ -6,7 +6,7 @@ locals {
 # IAM
 ######################################
 
-# [AIM] Service account
+# [IAM] Service account
 # Service account for the Dataflow job
 resource "google_service_account" "sa" {
   project      = var.project
@@ -14,12 +14,22 @@ resource "google_service_account" "sa" {
   display_name = "SA for the ${local.module_name}"
 }
 
-# TODO: Add permission to invoke API
-
+# [IAM] Policy
+# Policy to grant cloud run invoker to all users
+data "google_iam_policy" "noauth" {
+  binding {
+    role = "roles/run.invoker"
+    members = [
+      "allUsers",
+    ]
+  }
+}
 
 ######################################
 # Cloud Run
 ######################################
+
+# [Cloud Run] Service
 # Start API in Cloud Run using the specific image
 resource "google_cloud_run_service" "speech_api" {
 
@@ -51,19 +61,11 @@ resource "google_cloud_run_service" "speech_api" {
   }
 }
 
-data "google_iam_policy" "noauth" {
-  binding {
-    role = "roles/run.invoker"
-    members = [
-      "allUsers",
-    ]
-  }
-}
-
+# [Cloud Run] Policy
 # Grant all users ability to invoke the API
 resource "google_cloud_run_service_iam_policy" "noauth" {
 
-  # Not ideal
+  # Not ideal, as the policy will be removed when toggling the api
   count = var.enable_speech_api ? 1 : 0
 
   location    = google_cloud_run_service.speech_api[0].location
