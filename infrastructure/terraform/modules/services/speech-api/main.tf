@@ -34,7 +34,7 @@ resource "google_cloud_run_service" "speech_api" {
       service_account_name = google_service_account.sa.email
 
       containers {
-        # Fixed to specific version, should be deployed via CICD
+        # Fixed to specific version, should be deployed via CI/CD
         image = "eu.gcr.io/geometric-ocean-284614/speech-api:v1.0.0"
       }
     }
@@ -60,6 +60,7 @@ data "google_iam_policy" "noauth" {
   }
 }
 
+# Grant all users ability to invoke the API
 resource "google_cloud_run_service_iam_policy" "noauth" {
 
   # Not ideal
