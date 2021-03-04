@@ -28,3 +28,6 @@ out/
 # Python Tools
 __pycache__/
 *.pyc
+
+# Mac
+.DS_Store
