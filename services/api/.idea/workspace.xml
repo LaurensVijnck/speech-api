@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1688a724-b3c7-4589-8e14-fbc629f73a60" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../infrastructure/terraform/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../infrastructure/terraform/account.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../infrastructure/terraform/main.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../infrastructure/terraform/modules/services/speech-api/main.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../infrastructure/terraform/modules/services/speech-api/vars.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../infrastructure/terraform/provider.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../infrastructure/terraform/vars.tf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="1688a724-b3c7-4589-8e14-fbc629f73a60" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
