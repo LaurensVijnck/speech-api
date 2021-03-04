@@ -29,8 +29,11 @@ def speech_to_text_json():
 
      :return: JSON representation of the transcripts
      """
-    raw_data = request.get_data()
-    return jsonify(submit_speech_api_request(raw_data))
+    try:
+        raw_data = request.get_data()
+        return jsonify(submit_speech_api_request(raw_data))
+    except:
+        raise BadRequest(f"Invalid request.")
 
 
 @app.route('/v1/speech', methods=['POST'])
