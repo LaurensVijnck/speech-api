@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Run the API and mount credentials into the docker container
 docker run \
     -e PORT=8080 \
