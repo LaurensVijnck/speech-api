@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "geometric-ocean-284614",
+  "private_key_id": "77fba73ca7b027d6b6f108bdb2bd283988627c2f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC97JD49n4gUWTl\nFFjuaTI8FAZoNFcEAJlyFy4Ih2OCwzrg1E+t4qjzF/KqKRSLlxAH/kjgKRtsHHDP\nFTmrFd1xbn0hzQB7WTyRb45lJc3GYVaCFzf13zXrGCpierHXV94h8+W/KlCXFwOu\nwZw0+4tiPgDqUR/PrMi+2jJpvvKvI+q3kmWxEBLuTbzsOftVvTMDWA5IfE17L5KF\n2XQ+WfwnAS5lZfGFkLZ7FCHRm9jh5r+2Ylu+G2UEejE4wW6zLxNrvqFX1wOOwOMQ\n754g/6pBSairweOlXGgNdTbGasGFJhW99L+B6+jYxqGPwSEckBlLUQOY7EHH8BOH\nlkObULLZAgMBAAECggEAA3+iWwe1YpSFQogJrFihPYST6qL+MFtveC/PoAYYce31\nPXODxTz95j58cKCBmaGugKsxPfnb4LW0aUgnkAx+0ApcQT1kwyDtcfNnYNsdq4ga\n/xn85KlYNay0CSzf7krW03LJ+mfF5MaegX9dCIfStTxVqXtVle6FoyhjUdnb4BiF\n56h3LPNbkZ238VzBLShyNxntgYIP5HjQxZe13rPSacZeJxbIQ58mx4e3Me8qkAKc\noyyM8CjmVah7fe9ksqV+CKloz9vJ9oVrztdxm0uGxkCpVZDVHdzhKZ1wq0xJsUq0\njw0jmj97xHcFwbZb1HljqsPTHd4p8S325DVuBeBW9QKBgQDilCz7DbawkipDp/K7\nIguJZTCpJKkOxdaxFotMQah/mymiavhIaolC+bdUd2c1D6cBEgsO78fYz9YBd2bT\nSlbrouk7HmNz+4L8fuy8wUEG7HfiXCGRumgeZTbVwzYEBbcTYNm9z52YEmaqu/Na\nsO5J8HIMoawizqK1vZpzZDt11QKBgQDWle6LJyHtrwsFrl5bNEBLZ07d+GSguOhw\n9ejADAbCjlO3/PydaPnmnHQG8h4OmuteoLI/IxNZnnDxscrcSgDiW5Xywhj/2BPK\noTnChdU087aPgBkLhy87nCKKNMhHDLwsxdE7nFccx7EUhJPtyqNRQdm91Heqe//L\nELAdVlY29QKBgQCp4vZTCzZG8GFWNzBN1boWu9Ofj0hfNkHCqCer9rMTctDl4hTl\nn1Pp7vjiEWFGLMVIjTHTckBDNZq9oLxtgpjnt0/vLtrdFOFi1vxEjxZlzZoaFIBr\nFvyIhdV2tBblLy/VDNJWerwsUOe/7osKHg2dTPcGt5YsxwjDAjYzfR0EPQKBgQCB\nCfRCtauPdL2aEvsmuUsYjO0+SgqpI8iTdS0bn5/JCzGI6Jc4SVJNvTOAocQ1YC+9\n3cCSexM9xyuADDxDMDVL6WtIajQCVfvA1CcZtMU7bHsR3CQzbH2YyRF0Lr1pDF10\nRxjFUgSIiAUSo48ZZcvEJ2c64jN7z8lIYaamXa7GqQKBgQCaATBCajelAuwrZkRX\nsZBOwCQL0BIbIoyRXsP9gxLWgHS1RdfnMCpcdzoJGYV7PuTd9Z/WdVXvUiyGt8WD\n5NJm/5ndB/sXGWQlL+VY/J5miXLGAotRs5CJ8bq1bDbATcYvSn0+7FZyc8nKRErZ\nClRYqDIbMOPXuVupy8AJauU/6w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "lvijnck@geometric-ocean-284614.iam.gserviceaccount.com",
+  "client_id": "109597301369905639235",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lvijnck%40geometric-ocean-284614.iam.gserviceaccount.com"
+}
