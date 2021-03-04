@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export GOOGLE_APPLICATION_CREDENTIALS="/Users/lvijnck/Documents/google-cloud-sdk/geometric-ocean-284614-77fba73ca7b0.json"
+
 # Run the API and mount credentials into the docker container
 docker run \
     -e PORT=8080 \

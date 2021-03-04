@@ -1,1 +1,7 @@
+# Terraform
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+
+# Creds
 account.json
