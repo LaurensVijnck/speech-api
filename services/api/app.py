@@ -24,7 +24,7 @@ def hello_world():
 @app.route('/v2/speech', methods=['POST'])
 def speech_to_text_json():
     """
-     Octed-centric approach to speech to text.
+     Octet-centric approach to speech to text.
 
      :return: JSON representation of the transcripts
      """
@@ -82,13 +82,7 @@ def submit_speech_api_request(file: bytes, language_code: str = "en-US") -> dict
     # Source: https://cloud.google.com/speech-to-text/docs/sync-recognize
     # Did not dig into all the API options
     audio = speech.RecognitionAudio(content=file)
-    config = speech.RecognitionConfig(
-        # encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-        audio_channel_count=2, # Not entirely sure why this should be specified
-        language_code=language_code
-    )
-
-    # Invoke client
+    config = speech.RecognitionConfig(audio_channel_count=2, language_code=language_code)
     response = client.recognize(config=config, audio=audio)
 
     # Format JSON output
