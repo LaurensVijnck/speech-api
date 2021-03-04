@@ -34,6 +34,7 @@ resource "google_cloud_run_service" "speech_api" {
       service_account_name = google_service_account.sa.email
 
       containers {
+        # Fixed to specific version, should be deployed via CICD
         image = "eu.gcr.io/geometric-ocean-284614/speech-api:v1.0.0"
       }
     }
