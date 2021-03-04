@@ -12,7 +12,6 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 2048 * 2048
 app.config['UPLOAD_EXTENSIONS'] = ['.wav']
 app.config['SUPPORTED_LANGUAGE_CODES'] = ['en-US']
-app.config['UPLOAD_PATH'] = 'var/www/uploads/'
 
 
 @app.route('/')
