@@ -1,0 +1,61 @@
+swagger: '2.0'
+info:
+  title: speech-api speech-to-text
+  description: Speech API on API Gateway with a Cloud Run backend
+  version: 1.0.1
+schemes:
+  - https
+produces:
+  - application/json
+x-google-backend:
+  address: https://speech-api-5ledmsck3a-ew.a.run.app
+  # jwt_audience: https://SERVICE_HOSTNAME
+security:
+  - google_id_token: []
+paths:
+    /hello:
+      get:
+        summary: Cloud Run hello world
+        operationId: hello
+        responses:
+          '200':
+            description: A successful response
+            schema:
+              type: string
+    /v1/speech:
+      post:
+        summary: Convert speech snippet to text
+        operationId: convertSpeech
+        consumes:
+          - "multipart/form-data"
+# Not supported by GCP?
+#        parameters:
+#          - in: formData
+#            name: speech_file
+#            type: file
+#            description: The speech snippet to convert.
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              $ref: "#/definitions/Transcript"
+          "400":
+            description: "Invalid snippet"
+# https://cloud.google.com/api-gateway/docs/authenticating-users-googleid
+securityDefinitions:
+    google_id_token:
+      authorizationUrl: ""
+      flow: "implicit"
+      type: "oauth2"
+      x-google-issuer: "https://accounts.google.com"
+      x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
+      # Optional. Replace YOUR-CLIENT-ID with your client ID
+      # x-google-audiences: "YOUR-CLIENT-ID"
+definitions:
+  Transcript:
+    type: "object"
+    properties:
+      transcripts:
+        type: "array"
+        items:
+          type: "string"

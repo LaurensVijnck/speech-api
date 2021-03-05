@@ -1,5 +1,9 @@
 # FUTURE: Use GRPc driven, proto based, API.
 import os
+import time
+
+import google.auth.crypt
+import google.auth.jwt
 
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
@@ -14,11 +18,43 @@ app.config['UPLOAD_EXTENSIONS'] = ['.wav']
 app.config['SUPPORTED_LANGUAGE_CODES'] = ['en-US']
 
 
-@app.route('/')
+@app.route("/auth")
+def auth():
+    """Generates a signed JSON Web Token using a Google API Service Account."""
+
+    sa_email = 'account@project-id.iam.gserviceaccount.com',
+    audience = 'your-service-name',
+    expiry_length = 3600
+    now = int(time.time())
+
+    # build payload
+    payload = {
+        'iat': now,
+        # expires after 'expiry_length' seconds.
+        "exp": now + expiry_length,
+        # iss must match 'issuer' in the security configuration in your
+        # swagger spec (e.g. service account email). It can be any string.
+        'iss': sa_email,
+        # aud must be either your Endpoints service name, or match the value
+        # specified as the 'x-google-audience' in the OpenAPI document.
+        'aud': audience,
+        # sub and email should match the service account's email address
+        'sub': sa_email,
+        'email': sa_email
+    }
+
+    # sign with keyfile
+    signer = google.auth.crypt.RSASigner.from_service_account_file(sa_keyfile)
+    jwt = google.auth.jwt.encode(signer, payload)
+
+    return jwt
+
+
+@app.route('/hello')
 def hello_world():
     target = os.environ.get('TARGET', 'World')
     print(request.headers)
-    return 'Hello {}!\n'.format(target)
+    return jsonify('Hello {}!\n'.format(target))
 
 
 @app.route('/v2/speech', methods=['POST'])
@@ -58,8 +94,8 @@ def speech_to_text():
 
         # Validate language code
         app.logger.error(request.form)
-        language_code = request.form.get("language_code", None) # FUTURE: Fallback to default language instead
-        if language_code is None or language_code not in app.config["SUPPORTED_LANGUAGE_CODES"]:
+        language_code = request.form.get("language_code", "en-US")
+        if language_code not in app.config["SUPPORTED_LANGUAGE_CODES"]:
             raise BadRequest(f"Invalid language code '{language_code}' (supported languages codes: {', '.join(app.config['SUPPORTED_LANGUAGE_CODES'])})")
 
         # FUTURE: Set content type application-wide

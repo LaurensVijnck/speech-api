@@ -21,3 +21,28 @@ resource "google_project_service" "cloudrun" {
   disable_dependent_services = false
   disable_on_destroy         = false
 }
+
+# Enable Service Management
+resource "google_project_service" "servicemanagement" {
+  service                    = "servicemanagement.googleapis.com"
+  project                    = var.project
+  disable_dependent_services = false
+  disable_on_destroy         = false
+}
+
+# Enable Service Control
+resource "google_project_service" "servicecontrol" {
+  service                    = "servicecontrol.googleapis.com"
+  project                    = var.project
+  disable_dependent_services = false
+  disable_on_destroy         = false
+}
+
+# Enable API gateway
+resource "google_project_service" "apigateway" {
+  service                    = "apigateway.googleapis.com"
+  project                    = var.project
+  disable_dependent_services = false
+  disable_on_destroy         = false
+}
+

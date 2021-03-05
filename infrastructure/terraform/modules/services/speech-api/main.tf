@@ -65,7 +65,6 @@ resource "google_cloud_run_service" "speech_api" {
 # Grant all users ability to invoke the API
 resource "google_cloud_run_service_iam_policy" "noauth" {
 
-  # Not ideal, as the policy will be removed when toggling the api
   count = var.enable_speech_api ? 1 : 0
 
   location    = google_cloud_run_service.speech_api[0].location
