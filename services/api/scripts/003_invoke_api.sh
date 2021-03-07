@@ -6,4 +6,4 @@ curl -X POST \
   --header 'Accept: application/json' \
   -F speech_file=@"/Users/lvijnck/Desktop/speech-api/services/api/assets/test.wav" \
   -F language_code="en-US" \
-  'http://0.0.0.0:8080/v1/speech' -k
+  'http://0.0.0.0:8080/v1/speech'
