@@ -56,7 +56,7 @@ securityDefinitions:
 ```
 
 Make sure to replace the `SERVICE_ACCOUNT_EMAIL` occurrences above with the email of the service account that you intend to use. Additionally, replace `AUDIENCE` with anything arbitrary. The only requirement is that this should match the audience in
-the JWT.
+the YAML file describing the API Gateway configuration.
 
 To generate a JWT with access to the API, execute the command below. The resulting token should be included in the HTTP authentication header. The `jwt_token_gen.py` source
 code can be found in the `services/api/` directory.
