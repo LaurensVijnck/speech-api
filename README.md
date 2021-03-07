@@ -23,7 +23,7 @@ leverages API key based authentication, while the latter uses service account ba
 
 - Run the following scripts
     - `010_push_to_gcr.sh`: Build the docker image and push it to Google Container Registry
-    - `011_deploy_cloud_run.sh`: Deploy the docker image to Cloud Run`
+    - `011_deploy_cloud_run.sh`: Deploy the docker image to Cloud Run
     - `012_create_api.sh`: Create the API gateway API and API gateway config
     - `013_deploy_api.sh`: Deploy API gateway Gateway using the `speech-api.yaml
     - `014_invoke_remote.sh`: Invoke the remote version of the API gateway
