@@ -5,7 +5,7 @@ service leverages a Cloud Run backend.
 
 ## Deploy Speech-to-Text manually
 
-The Speech-to-Text backend in a simple Flask Application that was deployed to Cloud Run. 
+The Speech-to-Text backend is a simple Flask Application that was deployed to Cloud Run. 
 
 The `services/api/scripts` directory includes a series of test scripts to:
 
