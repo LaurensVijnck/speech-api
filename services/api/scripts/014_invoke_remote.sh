@@ -19,6 +19,6 @@ curl -X POST \
   --header "authorization: Bearer ${BEARER_TOKEN}" \
   --header 'Content-Type: multipart/form-data' \
   --header 'Accept: application/json' \
-  --form speech_file=@"/Users/lvijnck/Desktop/speech-api/services/api/assets/test.wav" \
+  --form speech_file=@"/Users/lvijnck/Desktop/speech-api/services/api/assets/test_2.wav" \
   --form language_code="en-US" \
   ${GATEWAY}/v1/speech
