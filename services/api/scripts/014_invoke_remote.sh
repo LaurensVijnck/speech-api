@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-TOKEN=AIzaSyCat_KuI5oSWLMwAFR4_ebJ1qmra_0Z_s0
+BEARER_TOKEN=$(python jwt_token_gen.py \
+    --file=/Users/lvijnck/Desktop/geometric-ocean-284614-d42818ab7892.json \
+    --audiences=https://speech-api-5ledmsck3a-ew.a.run.app \
+    --issuer=sa-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com)
 
-# Form based call
 curl -X POST \
-  --header "Authorization: Bearer ${TOKEN}" \
+  --header "authorization: Bearer ${BEARER_TOKEN}" \
   --header 'Content-Type: multipart/form-data' \
   --header 'Accept: application/json' \
   -F speech_file=@"/Users/lvijnck/Desktop/speech-api/services/api/assets/test.wav" \

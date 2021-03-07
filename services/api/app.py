@@ -1,6 +1,7 @@
 # FUTURE: Use GRPc driven, proto based, API.
 import os
 import time
+import requests
 
 import google.auth.crypt
 import google.auth.jwt
@@ -22,8 +23,9 @@ app.config['SUPPORTED_LANGUAGE_CODES'] = ['en-US']
 def auth():
     """Generates a signed JSON Web Token using a Google API Service Account."""
 
-    sa_email = 'account@project-id.iam.gserviceaccount.com',
-    audience = 'your-service-name',
+    sa_email = 'lvijnck@geometric-ocean-284614.iam.gserviceaccount.com',
+    issuer = 'https://accounts.google.com',
+    # audience = 'your-service-name',
     expiry_length = 3600
     now = int(time.time())
 
@@ -34,21 +36,34 @@ def auth():
         "exp": now + expiry_length,
         # iss must match 'issuer' in the security configuration in your
         # swagger spec (e.g. service account email). It can be any string.
-        'iss': sa_email,
+        'iss': issuer,
         # aud must be either your Endpoints service name, or match the value
         # specified as the 'x-google-audience' in the OpenAPI document.
-        'aud': audience,
+        'aud': "https://speech-api-5ledmsck3a-ew.a.run.app",
         # sub and email should match the service account's email address
-        'sub': sa_email,
-        'email': sa_email
+        'sub': sa_email
     }
 
     # sign with keyfile
-    signer = google.auth.crypt.RSASigner.from_service_account_file(sa_keyfile)
+    signer = google.auth.crypt.RSASigner.from_service_account_file("/tmp/keys/sa.json")
     jwt = google.auth.jwt.encode(signer, payload)
+
+    app.logger.error(google.auth.jwt.decode(jwt))
+    app.logger.error(jwt)
 
     return jwt
 
+
+@app.route("/req")
+def make_jwt_request(url='https://speech-api-2xxh104v.ew.gateway.dev/hello'):
+    """Makes an authorized request to the endpoint"""
+    headers = {
+        'Authorization': 'Bearer {}'.format(auth().decode('utf-8')),
+        'content-type': 'application/json'
+    }
+    response = requests.get(url, headers=headers)
+    print(response.status_code, response.content)
+    response.raise_for_status()
 
 @app.route('/hello')
 def hello_world():

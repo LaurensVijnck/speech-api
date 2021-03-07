@@ -9,7 +9,7 @@ produces:
   - application/json
 x-google-backend:
   address: https://speech-api-5ledmsck3a-ew.a.run.app
-  # jwt_audience: https://SERVICE_HOSTNAME
+#  jwt_audience: https://speech-api-5ledmsck3a-ew.a.run.app
 security:
   - google_id_token: []
 paths:
@@ -41,16 +41,14 @@ paths:
               $ref: "#/definitions/Transcript"
           "400":
             description: "Invalid snippet"
-# https://cloud.google.com/api-gateway/docs/authenticating-users-googleid
 securityDefinitions:
-    google_id_token:
-      authorizationUrl: ""
-      flow: "implicit"
-      type: "oauth2"
-      x-google-issuer: "https://accounts.google.com"
-      x-google-jwks_uri: "https://www.googleapis.com/oauth2/v3/certs"
-      # Optional. Replace YOUR-CLIENT-ID with your client ID
-      # x-google-audiences: "YOUR-CLIENT-ID"
+  google_id_token:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "sa-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com"
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com"
+    x-google-audiences: "https://speech-api-5ledmsck3a-ew.a.run.app"
 definitions:
   Transcript:
     type: "object"
