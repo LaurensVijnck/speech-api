@@ -8,15 +8,14 @@ schemes:
 produces:
   - application/json
 x-google-backend:
-  address: https://speech-api-5ledmsck3a-ew.a.run.app
-#  jwt_audience: https://speech-api-5ledmsck3a-ew.a.run.app
-security:
-  - google_id_token: []
+  address: https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app # FUTURE: Should be injected via Terraform
 paths:
     /hello:
       get:
         summary: Cloud Run hello world
         operationId: hello
+        security:
+          - api_key: []
         responses:
           '200':
             description: A successful response
@@ -34,6 +33,12 @@ paths:
 #            name: speech_file
 #            type: file
 #            description: The speech snippet to convert.
+#          - in: formData
+#            name: language_code
+#            type: string
+#            description: Source language of the speech snippet.
+        security:
+          - google_service_account: []
         responses:
           "200":
             description: "successful operation"
@@ -42,13 +47,19 @@ paths:
           "400":
             description: "Invalid snippet"
 securityDefinitions:
-  google_id_token:
+  # This section configures basic authentication with an API key.
+  # https://cloud.google.com/api-gateway/docs/quickstart-console#securing_access_by_using_an_api_key
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+  google_service_account:
     authorizationUrl: ""
     flow: "implicit"
     type: "oauth2"
-    x-google-issuer: "sa-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com"
-    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com"
-    x-google-audiences: "https://speech-api-5ledmsck3a-ew.a.run.app"
+    x-google-issuer: "sa-cr-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-cr-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
+    x-google-audiences: "https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app" # FUTURE: Inject via Terraform
 definitions:
   Transcript:
     type: "object"

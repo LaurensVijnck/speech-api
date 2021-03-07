@@ -1,10 +1,5 @@
 # FUTURE: Use GRPc driven, proto based, API.
 import os
-import time
-import requests
-
-import google.auth.crypt
-import google.auth.jwt
 
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
@@ -18,52 +13,6 @@ app.config['MAX_CONTENT_LENGTH'] = 2048 * 2048
 app.config['UPLOAD_EXTENSIONS'] = ['.wav']
 app.config['SUPPORTED_LANGUAGE_CODES'] = ['en-US']
 
-
-@app.route("/auth")
-def auth():
-    """Generates a signed JSON Web Token using a Google API Service Account."""
-
-    sa_email = 'lvijnck@geometric-ocean-284614.iam.gserviceaccount.com',
-    issuer = 'https://accounts.google.com',
-    # audience = 'your-service-name',
-    expiry_length = 3600
-    now = int(time.time())
-
-    # build payload
-    payload = {
-        'iat': now,
-        # expires after 'expiry_length' seconds.
-        "exp": now + expiry_length,
-        # iss must match 'issuer' in the security configuration in your
-        # swagger spec (e.g. service account email). It can be any string.
-        'iss': issuer,
-        # aud must be either your Endpoints service name, or match the value
-        # specified as the 'x-google-audience' in the OpenAPI document.
-        'aud': "https://speech-api-5ledmsck3a-ew.a.run.app",
-        # sub and email should match the service account's email address
-        'sub': sa_email
-    }
-
-    # sign with keyfile
-    signer = google.auth.crypt.RSASigner.from_service_account_file("/tmp/keys/sa.json")
-    jwt = google.auth.jwt.encode(signer, payload)
-
-    app.logger.error(google.auth.jwt.decode(jwt))
-    app.logger.error(jwt)
-
-    return jwt
-
-
-@app.route("/req")
-def make_jwt_request(url='https://speech-api-2xxh104v.ew.gateway.dev/hello'):
-    """Makes an authorized request to the endpoint"""
-    headers = {
-        'Authorization': 'Bearer {}'.format(auth().decode('utf-8')),
-        'content-type': 'application/json'
-    }
-    response = requests.get(url, headers=headers)
-    print(response.status_code, response.content)
-    response.raise_for_status()
 
 @app.route('/hello')
 def hello_world():
@@ -81,7 +30,7 @@ def speech_to_text_json():
      """
     try:
         raw_data = request.get_data()
-        return jsonify(submit_speech_api_request(raw_data))
+        return jsonify(submit_speech_api_request(raw_data, "en-US"))
     except:
         raise BadRequest(f"Invalid request.")
 
@@ -113,14 +62,14 @@ def speech_to_text():
         if language_code not in app.config["SUPPORTED_LANGUAGE_CODES"]:
             raise BadRequest(f"Invalid language code '{language_code}' (supported languages codes: {', '.join(app.config['SUPPORTED_LANGUAGE_CODES'])})")
 
-        # FUTURE: Set content type application-wide
+
         return jsonify(submit_speech_api_request(uploaded_file.read(), language_code))
 
     app.logger.error(f"Encountered request without speech file.")
     raise BadRequest(f"Request did not included a speech file.")
 
 
-def submit_speech_api_request(file: bytes, language_code: str = "en-US") -> dict:
+def submit_speech_api_request(file: bytes, language_code: str) -> dict:
     """
     Function to submit a speech-to-text API request.
 
