@@ -99,6 +99,9 @@ is merely a Proof-of-concept and is by no means final. Refer to `doc/text-to-spe
 > Note: the `speech-api.yaml` contains hardcoded references to Terraform. Ideally these should
 > be injected via Terraform. There exists various libraries that could be used to this end.
 
+> Note: the deployment assumes that the `speech-to-text` Container Registry image is deployed via 
+> a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded GCR image.
+
 > Note: the versioning strategy for the API gateway is not entirely clear to me yet. When updating `speech-api.yaml` the
 > Terraform provider attempts to create a new version of the configuration. A possible solution may be 
 > to version the configuration (did not investigate this in-depth).
