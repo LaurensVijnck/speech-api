@@ -16,6 +16,11 @@ app.config['SUPPORTED_LANGUAGE_CODES'] = ['en-US']
 
 @app.route('/hello')
 def hello_world():
+    """
+    Test endpoint, could be leveraged to perform health-checks.
+
+    :return: Generic Hello World message
+    """
     target = os.environ.get('TARGET', 'World')
     print(request.headers)
     return jsonify('Hello {}!\n'.format(target))
