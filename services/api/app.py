@@ -85,6 +85,9 @@ def submit_speech_api_request(file: bytes, language_code: str) -> dict:
     # Did not dig into all the API options, as the assignment
     # was to develop a small wrapper around the actual Speech-to-Text API.
     audio = speech.RecognitionAudio(content=file)
+
+    # TODO Extract 'audio_channel_count' from the input file itself
+    # https://stackoverflow.com/questions/47905083/how-to-check-number-of-channels-in-my-audio-wav-file-using-ffmpeg-command
     config = speech.RecognitionConfig(audio_channel_count=2, language_code=language_code)
     response = client.recognize(config=config, audio=audio)
 
