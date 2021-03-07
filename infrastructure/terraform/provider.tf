@@ -7,6 +7,7 @@ terraform {
   }
 }
 
+# Used to deploy the API Gateway
 provider "google-beta" {
   credentials =  file("account.json")
   project = var.project

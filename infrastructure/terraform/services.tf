@@ -1,3 +1,7 @@
+# NOTE: Services are best defined in a separate Terraform scope
+# or project. This may lead to failures in initial Terraform applies.
+# Did this quickly to demonstrate Terraform deployment of the API.
+
 # Enable IAM
 resource "google_project_service" "iam_service_account_credentials" {
   service                    = "iamcredentials.googleapis.com"
