@@ -41,6 +41,9 @@ data "google_iam_policy" "sa_api_gateway_speech_access" {
 # Start API in Cloud Run using the specific image
 resource "google_cloud_run_service" "speech_api" {
 
+  # NOTE: Solely the API gateway is able to invoke the
+  # Cloud Run instance.
+
   # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_service
   name     = "${local.module_name}-${var.env}"
   location = var.region
@@ -108,6 +111,11 @@ resource "google_api_gateway_api_config" "main_api_cfg" {
 
   openapi_documents {
     document {
+
+      # NOTE: Would be desired that this block supports injecting params.
+      # by default it does not. A possible solution could be to define the speech
+      # file inline and inject the params while doing so.
+
       path = "../../services/api/speech-api.yaml"
       contents = filebase64("../../services/api/speech-api.yaml")
     }
