@@ -90,6 +90,21 @@ curl ${GATEWAY_ENDPOINT_PATH}?key=${TOKEN}
     
 ## Deploy the Speech-to-Text through Terraform
 
+> Note: the Terraform codebase contains several limitations. To avoid running into one of these, I'm advising to comment some Terraform resources
+> and updating + re-enabling them in a second pass of the Terraform apply. Solutions to these limitations are listed in the limitations section.
+> 
+>   1. __Before__ the first apply disable the following resources:
+>       1. `mainapigateway` in `services.tf`
+>       1. `main_api_cfg` in `infrastructure/terraform/modules/speech-api/main.tf`
+>       1. `main_api_gw` in `infrastructure/terraform/modules/speech-api/main.tf`
+>   1. __After__ the first apply make the following modifications:
+>       1. `mainapigateway` in `services.tf` should reference the service name of `main_api_gateway` in `infrastructure/terraform/modules/speech-api/main.tf`
+>       1. `x-google-backend.address` in `services/api/speech-api.yaml` should reference the Cloud Run URL of `speech_api` in `infrastructure/terraform/modules/speech-api/main.tf`
+>       1.  `securityDefinitions.google_service_account.x-google-issuer` in `services/api/speech-api.yaml` should reference the SA email of `sa_gateway_client_app`in `infrastructure/terraform/modules/speech-api/main.tf`
+>       1.  `securityDefinitions.google_service_account.x-google-jwks_uri` in `services/api/speech-api.yaml` should include the SA email of `sa_gateway_client_app`in `infrastructure/terraform/modules/speech-api/main.tf`
+>   1. Re-enable the services in the first step
+>   1. Run `terraform apply` again
+ 
 The repository also includes code to deploy the API using Terraform. The Terraform codebase
 is merely a Proof-of-concept and is by no means final.
 
