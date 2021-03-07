@@ -26,7 +26,8 @@ def speech_to_text_json():
     """
      Octet-centric approach to speech to text.
 
-     NOTE: Path was not included in API definition.
+     NOTE: Path was not included in API definition, this was just
+     to demonstrate an alternative to using the form-based approach.
 
      :return: JSON representation of the transcripts
      """
@@ -81,16 +82,20 @@ def submit_speech_api_request(file: bytes, language_code: str) -> dict:
     client = speech.SpeechClient()
 
     # Source: https://cloud.google.com/speech-to-text/docs/sync-recognize
-    # Did not dig into all the API options
+    # Did not dig into all the API options, as the assignment
+    # was to develop a small wrapper around the actual Speech-to-Text API.
     audio = speech.RecognitionAudio(content=file)
     config = speech.RecognitionConfig(audio_channel_count=2, language_code=language_code)
     response = client.recognize(config=config, audio=audio)
+
+    # FUTURE: Additional error handling may be appropriate.
 
     # Format JSON output
     return {
         # Each result is for a consecutive portion of the audio. Iterate through
         # them to get the transcripts for the entire audio file.
         # The first alternative is the most likely one for this portion.
+        #
         # FUTURE: Check if alternatives[0] always exists
         "transcripts": [f"{result.alternatives[0].transcript}" for result in response.results]
     }
