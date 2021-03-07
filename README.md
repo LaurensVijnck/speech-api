@@ -42,11 +42,11 @@ is merely a Proof-of-concept and is by no means final. Navigate to the `infrastr
 > Note: the `services.tf` is best applied in a separate scope or project. Initial attempts
 > to apply the Terraform may fail due to dependencies.
 
-> Note: The `services.tf` includes a pointer to the API gateway service. The path to this service
+> Note: the `services.tf` includes a pointer to the API gateway service. The path to this service
 > was currently hardcoded due to Terraform not exposing the service name. I'm currently unsure how
 > this could be improved (did not investigate this in-depth).
 
-> Note: The `speech-api.yaml` contains hardcoded references to Terraform. Ideally these should
+> Note: the `speech-api.yaml` contains hardcoded references to Terraform. Ideally these should
 > be injected via Terraform. There exists various libraries that could be used to this end.
 
  
