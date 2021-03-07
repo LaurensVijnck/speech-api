@@ -100,7 +100,8 @@ is merely a Proof-of-concept and is by no means final. Refer to `doc/text-to-spe
 > be injected via Terraform. There exists various libraries that could be used to this end.
 
 > Note: the deployment assumes that the `speech-to-text` Container Registry image is deployed via 
-> a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded GCR image.
+> a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded GCR image. Before deploying
+> make sure that the image exists, this can be done by executing script `010_push_to_gcr.sh`.
 
 > Note: the versioning strategy for the API gateway is not entirely clear to me yet. When updating `speech-api.yaml` the
 > Terraform provider attempts to create a new version of the configuration. A possible solution may be 
