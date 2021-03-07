@@ -22,6 +22,14 @@ resource "google_service_account" "sa_api_gateway" {
   display_name = "SA for the API Gateway"
 }
 
+# [IAM] Service account
+# Service account for API gateway
+resource "google_service_account" "sa_gateway_client_app" {
+  project      = var.project
+  account_id   = "sa-gateway-client-${var.env}"
+  display_name = "SA for the API Gateway client"
+}
+
 # [IAM] Policy
 # Policy to grant cloud run invoker to the API gateway SA
 data "google_iam_policy" "sa_api_gateway_speech_access" {
@@ -62,11 +70,6 @@ resource "google_cloud_run_service" "speech_api" {
   traffic {
     percent         = 100
     latest_revision = true
-  }
-
-  lifecycle {
-    # block destruction to avoid removal of unique endpoint
-    prevent_destroy = true
   }
 }
 

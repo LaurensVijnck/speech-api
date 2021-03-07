@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export GOOGLE_APPLICATION_CREDENTIALS="/Users/lvijnck/Documents/google-cloud-sdk/geometric-ocean-284614-77fba73ca7b0.json"
+# Note: make sure that $GOOGLE_APPLICATION_CREDENTIALS environment var contains path to SA key file
 
 # Run the API and mount credentials into the docker container
 docker run \

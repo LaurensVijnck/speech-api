@@ -53,12 +53,14 @@ securityDefinitions:
     type: "apiKey"
     name: "key"
     in: "query"
+  # The section below references Terraform created resources. This is highly inconvenient at the should be
+  # injected by Terraform instead.
   google_service_account:
     authorizationUrl: ""
     flow: "implicit"
     type: "oauth2"
-    x-google-issuer: "sa-cr-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
-    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-cr-speech-api-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
+    x-google-issuer: "sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
     x-google-audiences: "https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app" # FUTURE: Inject via Terraform
 definitions:
   Transcript:
