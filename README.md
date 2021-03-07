@@ -1,7 +1,7 @@
 # Speech-to-Text API
 
 Repository contains the code to deploy a wrapper around Google's Speech-to-Text API on the Google API Gateway. The API Gateway
-service leverages a Cloud Run backend.
+service leverages a Cloud Run backend. Refer to `doc/`
 
 ## Deploy Speech-to-Text manually
 
@@ -18,6 +18,9 @@ The `services/api/scripts` directory includes a series of test scripts to:
     
 ### Create the API gateway:
 
+The API Gateway features two endpoints, i.e., `/hello` and `/v1/speech` respectively. The former 
+leverages API key based authentication, while the latter uses service account based authentication.
+
 - Run the following scripts
     - `010_push_to_gcr.sh`: Build the docker image and push it to Google Container Registry
     - `011_deploy_cloud_run.sh`: Deploy the docker image to Cloud Run`
@@ -27,7 +30,53 @@ The `services/api/scripts` directory includes a series of test scripts to:
     - `015_enable_security.sh`: Grant service ability to key management
     
 > Note: various scripts contain hardcoded references to Terraform resources. Most of these
-> were extracted into separate variables. Make sure that these reflect your own configuration.  
+> were extracted into separate variables. Make sure that these reflect your own configuration.
+
+### Important pitfalls  
+
+#### Service Account Authentication
+
+The authentication strategy specified in [the OpenAPI documentation](https://cloud.google.com/endpoints/docs/openapi/authenticating-users-google-id) appears to be invalid. Token based authentication for a
+Service Account can be enabled using the following security definition:
+
+```yaml
+securityDefinitions:
+  google_service_account:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "SERVICE_ACCOUNT_EMAIL"
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/SERVICE_ACCOUNT_EMAIL"
+    x-google-audiences: "AUDIENCE"
+```
+
+Make sure to replace the `SERVICE_ACCOUNT_EMAIL` occurrences above with the email of the service account that you intend to use. Additionally, replace `CLOUD_RUN_INSTANCE` with anything arbitrary. The only requirement is that this should match the audience in
+the JWT.
+
+To generate a JWT with access to the API, execute the command below. The resulting token should be included in the HTTP authentication header.
+
+```bash
+python jwt_token_gen.py \
+    --file=${PATH_TO_SERVICE_ACCOUNT_CREDENTIALS} \
+    --audiences=${AUDIENCE} \
+    --issuer=${SERVICE_ACCOUNT_EMAIL}
+```
+
+#### API Key Authentication
+
+GCP features a [video tutorial](https://www.youtube.com/watch?v=MhZ99z6TsJA) on enabling API key authentication
+on API gateways. Unfortunately, the video does _not_ include the following security block.
+
+```yaml
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+```
+
+To access the API with API key security enabled, add the `key=${TOKEN}` query argument when invoking the API.
+
     
 ## Deploy the Speech-to-Text through Terraform
 
