@@ -49,5 +49,8 @@ is merely a Proof-of-concept and is by no means final. Navigate to the `infrastr
 > Note: the `speech-api.yaml` contains hardcoded references to Terraform. Ideally these should
 > be injected via Terraform. There exists various libraries that could be used to this end.
 
+> Note: the versioning strategy for the API gateway is not entirely clear to me yet. When updating `speech-api.yaml` the
+> Terraform provider attempts to create a new version of the configuration. A possible solution may be 
+> to version the configuration (did not investigate this in-depth).
  
  
