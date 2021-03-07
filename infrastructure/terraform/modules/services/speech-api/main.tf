@@ -41,9 +41,6 @@ data "google_iam_policy" "sa_api_gateway_speech_access" {
 # Start API in Cloud Run using the specific image
 resource "google_cloud_run_service" "speech_api" {
 
-  # Enables users to disable this on specific environments; e.g., personal
-  count = var.enable_speech_api ? 1 : 0
-
   # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloud_run_service
   name     = "${local.module_name}-${var.env}"
   location = var.region
@@ -74,11 +71,9 @@ resource "google_cloud_run_service" "speech_api" {
 # Grant api gateway to invoke the API
 resource "google_cloud_run_service_iam_policy" "api_gateway_speech_api_access" {
 
-  count = var.enable_speech_api ? 1 : 0
-
-  location    = google_cloud_run_service.speech_api[0].location
-  project     = google_cloud_run_service.speech_api[0].project
-  service     = google_cloud_run_service.speech_api[0].name
+  location    = google_cloud_run_service.speech_api.location
+  project     = google_cloud_run_service.speech_api.project
+  service     = google_cloud_run_service.speech_api.name
 
   policy_data = data.google_iam_policy.sa_api_gateway_speech_access.policy_data
 }
@@ -101,6 +96,11 @@ resource "google_api_gateway_api" "main_api_gateway" {
 # [API Gateway] config
 # Create configuration for the gateway
 resource "google_api_gateway_api_config" "main_api_cfg" {
+
+  # NOTE: Update strategy is not entirely clear to me yet.
+  # A possible solution could be to add a version postfix to the
+  # OpenAPI file. Did not give this a try as the Terraform
+  # component was optional.
 
   provider = google-beta
   api = google_api_gateway_api.main_api_gateway.api_id

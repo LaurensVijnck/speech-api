@@ -26,6 +26,8 @@ def speech_to_text_json():
     """
      Octet-centric approach to speech to text.
 
+     NOTE: Path was not included in API definition.
+
      :return: JSON representation of the transcripts
      """
     try:
@@ -61,7 +63,6 @@ def speech_to_text():
         language_code = request.form.get("language_code", "en-US")
         if language_code not in app.config["SUPPORTED_LANGUAGE_CODES"]:
             raise BadRequest(f"Invalid language code '{language_code}' (supported languages codes: {', '.join(app.config['SUPPORTED_LANGUAGE_CODES'])})")
-
 
         return jsonify(submit_speech_api_request(uploaded_file.read(), language_code))
 

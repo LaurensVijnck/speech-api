@@ -5,5 +5,4 @@ module "speech-api" {
   env               = var.env
   region            = var.region
   zone              = var.zone
-  enable_speech_api = var.enable_active_components
 }

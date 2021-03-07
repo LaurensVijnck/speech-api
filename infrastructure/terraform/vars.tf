@@ -15,9 +15,3 @@ variable "region" {
 variable "zone" {
   description = "Default zone for services and compute resources"
 }
-
-variable "enable_active_components" {
-  type        = bool
-  description = "Boolean that indicates whether active components should be deployed, e.g., Cloud Run jobs"
-  default     = true
-}
