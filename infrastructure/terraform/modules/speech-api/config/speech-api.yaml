@@ -9,7 +9,7 @@ schemes:
 produces:
   - application/json
 x-google-backend:
-  address: https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app
+  address: https://cr-speech-api-dev-2-htdyjkg6qq-ew.a.run.app
 paths:
     /hello:
       get:
@@ -50,8 +50,8 @@ securityDefinitions:
     authorizationUrl: ""
     flow: "implicit"
     type: "oauth2"
-    x-google-issuer: "sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com"
-    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com"
+    x-google-issuer: "sa-gateway-client-dev@dev-lvi.iam.gserviceaccount.com"
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-gateway-client-dev@dev-lvi.iam.gserviceaccount.com"
     x-google-audiences: "speech-api" # Pick anything, be sure to match when creating the token
 definitions:
   Transcript:

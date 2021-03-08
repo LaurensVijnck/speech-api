@@ -1,3 +1,11 @@
+# Enable resource manager
+resource "google_project_service" "gcp_resource_manager_api" {
+  service = "cloudresourcemanager.googleapis.com"
+  project                    = var.project
+  disable_dependent_services = false
+  disable_on_destroy         = false
+}
+
 # Enable IAM
 resource "google_project_service" "project" {
   service                    = "iam.googleapis.com"
@@ -49,14 +57,6 @@ resource "google_project_service" "servicecontrol" {
 # Enable API gateway
 resource "google_project_service" "apigateway" {
   service                    = "apigateway.googleapis.com"
-  project                    = var.project
-  disable_dependent_services = false
-  disable_on_destroy         = false
-}
-
-# Enable resource manager
-resource "google_project_service" "gcp_resource_manager_api" {
-  service = "cloudresourcemanager.googleapis.com"
   project                    = var.project
   disable_dependent_services = false
   disable_on_destroy         = false

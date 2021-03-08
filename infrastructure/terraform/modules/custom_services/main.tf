@@ -7,7 +7,7 @@ resource "google_project_service" "mainapigateway" {
 }
 
 # [External] data
-# Some bash magic to automatically discover the API gateway services
+# Some bash magic to automatically discover the custom API gateway service
 # WARNING: Is highly coupled to the 'app-id' of the 'main_api_gateway' resources of the speech-api module
 # NOTE: Assumes that jq utility is installed on host machine and that gcloud is configured.
 data "external" "gateway_service_name" {
