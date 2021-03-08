@@ -4,8 +4,8 @@ module "gcp_services" {
   project = var.project
 }
 
-module "speech-api" {
-  source = "./modules/speech-api"
+module "speech_api" {
+  source = "./modules/speech_api"
 
   project           = var.project
   env               = var.env

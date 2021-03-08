@@ -180,7 +180,7 @@ resource "google_api_gateway_api_config" "main_api_cfg" {
   # OpenAPI file. Did not give this a try as the Terraform
   # component was optional.
 
-  depends_on = [local_file.api_gateway_config]
+  depends_on = [google_cloud_run_service.speech_api, local_file.api_gateway_config]
 
   provider = google-beta
   api = google_api_gateway_api.main_api_gateway.api_id
@@ -188,8 +188,8 @@ resource "google_api_gateway_api_config" "main_api_cfg" {
 
   openapi_documents {
     document {
-      path = "${path.module}/config/speech-api.yaml"
-      contents = filebase64("${path.module}/config/speech-api.yaml")
+      path = local_file.api_gateway_config.filename
+      contents = base64encode(local_file.api_gateway_config.content)
     }
   }
 
