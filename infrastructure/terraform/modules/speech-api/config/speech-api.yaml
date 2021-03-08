@@ -1,0 +1,62 @@
+swagger: '2.0'
+info:
+  title: speech-api speech-to-text
+  description: Speech API on API Gateway with a Cloud Run backend
+  version: 1.0.1
+schemes:
+  - https
+produces:
+  - application/json
+x-google-backend:
+  address: https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app
+paths:
+    /hello:
+      get:
+        summary: Cloud Run hello world
+        operationId: hello
+        security:
+          - api_key: []
+        responses:
+          '200':
+            description: A successful response
+            schema:
+              type: string
+    /v1/speech:
+      post:
+        summary: Convert speech snippet to text
+        operationId: convertSpeech
+        consumes:
+          - "multipart/form-data"
+        security:
+          - google_service_account: []
+        responses:
+          "200":
+            description: "successful operation"
+            schema:
+              $ref: "#/definitions/Transcript"
+          "400":
+            description: "Invalid snippet"
+securityDefinitions:
+  # This section configures basic authentication with an API key.
+  # https://cloud.google.com/api-gateway/docs/quickstart-console#securing_access_by_using_an_api_key
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+  # The section below references Terraform created resources. This is highly inconvenient at the should be
+  # injected by Terraform instead.
+  google_service_account:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com"
+    x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com"
+    x-google-audiences: "speech-api" # Pick anything, be sure to match when creating the token
+definitions:
+  Transcript:
+    type: "object"
+    properties:
+      transcripts:
+        type: "array"
+        items:
+          type: "string"
