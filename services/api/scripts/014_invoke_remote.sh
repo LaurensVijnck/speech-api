@@ -17,7 +17,7 @@ API_CLIENT_GATEWAY_AUTH_SA_EMAIL=sa-gateway-client-dev@geometric-ocean-284614.ia
 
 # Obtain bearer token for service account
 
-# Note make sure to create/activate a venv with requirements.txt in order to execute the comment below
+# Note make sure to create/activate a venv with requirements.txt in order to execute the command below
 BEARER_TOKEN=$(python jwt_token_gen.py \
     --file=${API_CLIENT_GATEWAY_AUTH_SA_PATH} \
     --audiences=${AUDIENCE} \
