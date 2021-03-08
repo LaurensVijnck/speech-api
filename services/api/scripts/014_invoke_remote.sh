@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 GATEWAY=https://speech-api-v1-2xxh104v.ew.gateway.dev # Make sure to align with API gateway URL
-AUDIENCE=https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app # Make sure to align with audience defined in `speech-api.yaml`
+AUDIENCE=speech-api # Make sure to align with audience defined in `speech-api.yaml`
 
 # 1. Curl endpoint using project API token
 

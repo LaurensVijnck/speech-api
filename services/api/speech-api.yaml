@@ -62,7 +62,7 @@ securityDefinitions:
     type: "oauth2"
     x-google-issuer: "sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
     x-google-jwks_uri: "https://www.googleapis.com/robot/v1/metadata/x509/sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com" # FUTURE: Inject via Terraform
-    x-google-audiences: "https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app" # FUTURE: Inject via Terraform
+    x-google-audiences: "speech-api"
 definitions:
   Transcript:
     type: "object"
