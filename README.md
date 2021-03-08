@@ -34,7 +34,7 @@ leverages API key based authentication, while the latter uses service account ba
 > Note: various scripts contain hardcoded references to Terraform resources. Most of these
 > were extracted into separate variables. Make sure that these reflect your own configuration.
 
-> Note: Scripts defined below do not adhere the principle of least privilege to simplify testing. The
+> Note: the scripts outlined above do not adhere the principle of least privilege to simplify testing. The
 > Terraform code, on the other hand, maintains this security principle.
 
 ### Important pitfalls  
