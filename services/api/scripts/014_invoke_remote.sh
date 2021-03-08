@@ -9,7 +9,7 @@ AUDIENCE=speech-api # Make sure to align with audience defined in `speech-api.ya
 TOKEN=PASTE_HERE
 curl ${GATEWAY}/hello?key=${TOKEN}
 
-# 2. Curl endpoint using project API token
+# 2. Curl endpoint using SA key token
 
 # Note: Create SA key credentials for the service account as referenced in the 'google_service_account' section of the `speech-api.yaml`
 API_CLIENT_GATEWAY_AUTH_SA_PATH=/Users/lvijnck/Desktop/speech-api-creds/sa-client.json

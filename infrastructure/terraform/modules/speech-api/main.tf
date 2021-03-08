@@ -23,7 +23,7 @@ resource "google_service_account" "sa_api_gateway" {
 }
 
 # [IAM] Service account
-# Service account for API gateway
+# Service account for the client app
 resource "google_service_account" "sa_gateway_client_app" {
   project      = var.project
   account_id   = "sa-gateway-client-${var.env}"
