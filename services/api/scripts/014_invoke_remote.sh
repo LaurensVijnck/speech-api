@@ -9,7 +9,7 @@ AUDIENCE=https://cr-speech-api-dev-5ledmsck3a-ew.a.run.app # Make sure to align 
 TOKEN=AIzaSyDIFSteFkJr_f0hc074T_9FDIC_ZOLctOk
 curl ${GATEWAY}/hello?key=${TOKEN}
 
-# 2. Curl endpoint using project API token
+# 2. Curl endpoint using SA key token
 
 # Note: Create an SA key credentials for the service account as referenced in the 'google_service_account' section of the `speech-api.yaml`
 API_CLIENT_GATEWAY_AUTH_SA_PATH=/Users/lvijnck/Desktop/credentials/geometric-ocean-284614-93c7e086b9d0.json
