@@ -11,7 +11,7 @@ curl ${GATEWAY}/hello?key=${TOKEN}
 
 # 2. Curl endpoint using project API token
 
-# Note: Create an API credentials for the service account as referenced in the 'google_service_account' section of the `speech-api.yaml`
+# Note: Create an SA key credentials for the service account as referenced in the 'google_service_account' section of the `speech-api.yaml`
 API_CLIENT_GATEWAY_AUTH_SA_PATH=/Users/lvijnck/Desktop/credentials/geometric-ocean-284614-93c7e086b9d0.json
 API_CLIENT_GATEWAY_AUTH_SA_EMAIL=sa-gateway-client-dev@geometric-ocean-284614.iam.gserviceaccount.com
 
