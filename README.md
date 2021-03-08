@@ -104,8 +104,8 @@ curl ${GATEWAY_ENDPOINT_PATH}?key=${TOKEN}
 a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded GCR image. Before deploying
 make sure that the image exists, this can be done by executing script `010_push_to_gcr.sh`.
 
-- The versioning strategy for the API gateway is not entirely clear to me yet. When updating `speech-api.yaml` the 
-Terraform provider attempts to create a new version of the configuration. A possible solution may be 
+- The versioning strategy for the API gateway is not entirely clear to me yet. When updating API YAML configuration in Terraform,  
+the provider attempts to create a new version of the configuration. A possible solution may be 
 to version the configuration (did not investigate this in-depth). The current work around is to delete the getaway and config
 manually and re-apply Terraform hereafter.
  
