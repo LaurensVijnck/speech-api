@@ -41,7 +41,7 @@ leverages API key based authentication, while the latter uses service account ba
 
 1. Navigate to the `infrastructure/terraform` directory
 1. Adjust the `terraform.tfvars` to reflect your project
-1. Add an `acount.json` file to `infrastructure/terraform` containing SA credentials of a project owner
+1. Add an `account.json` file to `infrastructure/terraform` containing SA credentials of a project owner
 1. Run `terraform init` to initialize Terraform
 1. Execute script `010_push_to_gcr.sh` to push the API image to Container Registry (see limitations)
 3. Run `terraform apply -target module.gcp_services` to enable the relevant GCP services
