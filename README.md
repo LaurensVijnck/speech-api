@@ -94,7 +94,7 @@ curl ${GATEWAY_ENDPOINT_PATH}?key=${TOKEN}
 1. Adjust the `terraform.tfvars` to reflect your project
 1. Add an `acount.json` file to `infrastructure/terraform` containing SA credentials of a project owner
 1. Run `terraform init` to initialize Terraform
-1. Execute script `010_push_to_gcr.sh` to push the API image to Cloud Registry (see limitations)
+1. Execute script `010_push_to_gcr.sh` to push the API image to Container Registry (see limitations)
 3. Run `terraform apply -target module.gcp_services` to enable the relevant GCP services
 4. Run `terraform apply -target module.speech_api` to deploy the resources of the Speech API
 5. Run `terraform apply -target module.custom_services` to enable the custom created service
@@ -106,8 +106,7 @@ a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded 
 make sure that the image exists, this can be done by executing script `010_push_to_gcr.sh`.
 
 - The versioning strategy for the API gateway is not entirely clear to me yet. When updating API YAML configuration in Terraform,  
-the provider attempts to create a new version of the configuration. A possible solution may be 
-to version the configuration (did not investigate this in-depth). The current work around is to delete the getaway and config
+the provider attempts to create a new version of the configuration. A possible solution may be to version the configuration (did not investigate this in-depth). The current work around is to delete the getaway and config
 manually and re-apply Terraform hereafter.
  
  
