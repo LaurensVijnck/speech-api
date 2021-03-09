@@ -37,7 +37,7 @@ leverages API key based authentication, while the latter uses service account ba
 > Note: the scripts outlined above do not adhere the principle of least privilege to simplify testing. The
 > Terraform code, on the other hand, maintains this security principle.
     
-## Deploy the Speech-to-Text through Terraform
+## Deploy Speech-to-Text via Terraform
 
 1. Navigate to the `infrastructure/terraform` directory
 1. Adjust the `terraform.tfvars` to reflect your project
