@@ -149,8 +149,6 @@ securityDefinitions:
     type: "apiKey"
     name: "key"
     in: "query"
-  # The section below references Terraform created resources. This is highly inconvenient at the should be
-  # injected by Terraform instead.
   google_service_account:
     authorizationUrl: ""
     flow: "implicit"
