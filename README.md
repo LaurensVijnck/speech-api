@@ -36,10 +36,29 @@ leverages API key based authentication, while the latter uses service account ba
 
 > Note: the scripts outlined above do not adhere the principle of least privilege to simplify testing. The
 > Terraform code, on the other hand, maintains this security principle.
+    
+## Deploy the Speech-to-Text through Terraform
 
-### Important pitfalls  
+1. Navigate to the `infrastructure/terraform` directory
+1. Adjust the `terraform.tfvars` to reflect your project
+1. Add an `acount.json` file to `infrastructure/terraform` containing SA credentials of a project owner
+1. Run `terraform init` to initialize Terraform
+1. Execute script `010_push_to_gcr.sh` to push the API image to Container Registry (see limitations)
+3. Run `terraform apply -target module.gcp_services` to enable the relevant GCP services
+4. Run `terraform apply -target module.speech_api` to deploy the resources of the Speech API
+5. Run `terraform apply -target module.custom_services` to enable the custom created service
 
-#### Service Account Authentication
+### Known limitations
+
+- The deployment assumes that the `speech-to-text` Container Registry image is deployed via 
+a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded GCR image. Before deploying
+make sure that the image exists, this can be done by executing script `010_push_to_gcr.sh`.
+
+- The versioning strategy for the API gateway is not entirely clear to me yet. When updating API YAML configuration in Terraform, the provider attempts to create a new version of the configuration (crashing due to it existing). A possible solution may be to version the configuration (did not investigate this in-depth). The current work around is to delete the getaway and config manually and re-apply Terraform hereafter.
+
+## Important pitfalls  
+
+### Service Account Authentication
 
 The authentication strategy specified in [the OpenAPI documentation](https://cloud.google.com/endpoints/docs/openapi/authenticating-users-google-id) appears to be invalid. Token based authentication for a
 Service Account can be enabled using the following security definition:
@@ -68,7 +87,7 @@ python jwt_token_gen.py \
     --issuer=${SERVICE_ACCOUNT_EMAIL}
 ```
 
-#### API Key Authentication
+### API Key Authentication
 
 GCP features a [video tutorial](https://www.youtube.com/watch?v=MhZ99z6TsJA) on enabling API key authentication
 on API gateways. Unfortunately, the video does _not_ include the following security block.
@@ -87,24 +106,4 @@ as defined by the gateway configuration.
 ```bash
 curl ${GATEWAY_ENDPOINT_PATH}?key=${TOKEN}
 ```
-    
-## Deploy the Speech-to-Text through Terraform
-
-1. Navigate to the `infrastructure/terraform` directory
-1. Adjust the `terraform.tfvars` to reflect your project
-1. Add an `acount.json` file to `infrastructure/terraform` containing SA credentials of a project owner
-1. Run `terraform init` to initialize Terraform
-1. Execute script `010_push_to_gcr.sh` to push the API image to Container Registry (see limitations)
-3. Run `terraform apply -target module.gcp_services` to enable the relevant GCP services
-4. Run `terraform apply -target module.speech_api` to deploy the resources of the Speech API
-5. Run `terraform apply -target module.custom_services` to enable the custom created service
-
-### Known limitations
-
-- The deployment assumes that the `speech-to-text` Container Registry image is deployed via 
-a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded GCR image. Before deploying
-make sure that the image exists, this can be done by executing script `010_push_to_gcr.sh`.
-
-- The versioning strategy for the API gateway is not entirely clear to me yet. When updating API YAML configuration in Terraform, the provider attempts to create a new version of the configuration (crashing due to it existing). A possible solution may be to version the configuration (did not investigate this in-depth). The current work around is to delete the getaway and config manually and re-apply Terraform hereafter.
- 
  
