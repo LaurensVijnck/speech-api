@@ -27,7 +27,7 @@ leverages API key based authentication, while the latter uses service account ba
     - `010_push_to_gcr.sh`: Build the docker image and push it to Google Container Registry
     - `011_deploy_cloud_run.sh`: Deploy the docker image to Cloud Run
     - `012_create_api.sh`: Create the API gateway API and API gateway config
-    - `013_deploy_api.sh`: Deploy API gateway Gateway using the `speech-api.yaml
+    - `013_deploy_api.sh`: Deploy API gateway Gateway using the `speech-api.yaml`
     - `014_invoke_remote.sh`: Invoke the remote version of the API gateway
     - `015_enable_security.sh`: Grant service ability to key management
     
@@ -105,8 +105,6 @@ curl ${GATEWAY_ENDPOINT_PATH}?key=${TOKEN}
 a separate CI/CD pipeline. Hence, the Cloud Run resource references a hardcoded GCR image. Before deploying
 make sure that the image exists, this can be done by executing script `010_push_to_gcr.sh`.
 
-- The versioning strategy for the API gateway is not entirely clear to me yet. When updating API YAML configuration in Terraform,  
-the provider attempts to create a new version of the configuration. A possible solution may be to version the configuration (did not investigate this in-depth). The current work around is to delete the getaway and config
-manually and re-apply Terraform hereafter.
+- The versioning strategy for the API gateway is not entirely clear to me yet. When updating API YAML configuration in Terraform, the provider attempts to create a new version of the configuration (crashing due to it existing). A possible solution may be to version the configuration (did not investigate this in-depth). The current work around is to delete the getaway and config manually and re-apply Terraform hereafter.
  
  
