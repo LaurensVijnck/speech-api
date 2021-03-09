@@ -94,9 +94,10 @@ curl ${GATEWAY_ENDPOINT_PATH}?key=${TOKEN}
 1. Adjust the `terraform.tfvars` to reflect your project
 1. Add an `acount.json` file to `infrastructure/terraform` containing SA credentials of a project owner
 1. Run `terraform init` to initialize Terraform
-1. Run `terraform apply -target module.gcp_services` to enable the relevant GCP services
-1. Run `terraform apply -target module.speech-api` to deploy the resources of the Speech API
-1. Run `terraform apply -target module.custom_services` to enable the custom created service
+1. Execute script `010_push_to_gcr.sh` to push the API image to Cloud Registry (see limitations)
+3. Run `terraform apply -target module.gcp_services` to enable the relevant GCP services
+4. Run `terraform apply -target module.speech_api` to deploy the resources of the Speech API
+5. Run `terraform apply -target module.custom_services` to enable the custom created service
 
 ### Known limitations
 
